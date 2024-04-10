@@ -1,17 +1,17 @@
-# {{moduleName}}.{{classname}}{{#description}}
+# {{classname}}{{#description}}
 
 {{description}}{{/description}}
 
 All URIs are relative to *{{basePath}}*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-{{#operations}}{{#operation}}[**{{operationId}}**]({{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+Method | HTTP request
+------------- | -------------
+{{#operations}}{{#operation}}[**{{operationId}}**{{#isDeprecated}} - (Deprecated){{/isDeprecated}}**]({{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}}
 {{/operation}}{{/operations}}
 
 {{#operations}}
 {{#operation}}
-## **{{{operationId}}}**
+# **{{{operationId}}}**{{#isDeprecated}} - (Deprecated){{/isDeprecated}} {#{{operationIdLowerCase}}}
 > {{#returnType}}{{{returnType}}} {{/returnType}}{{{operationId}}}({{#requiredParams}}{{^defaultValue}}{{paramName}}{{^-last}}, {{/-last}}{{/defaultValue}}{{/requiredParams}})
 
 {{#notes}}
@@ -20,32 +20,33 @@ Method | HTTP request | Description
 
 ### Example
 
-
 ```typescript
-import { {{classname}} } from '{{{projectName}}}';
+import * as Pieces from '{{npmName}}'
 
-const apiInstance = new {{{moduleName}}}.{{classname}}();
+const configuration = Pieces.Configuration()
+const apiInstance = new Pieces.{{classname}}(configuration)
 
 {{#hasParams}}
-let body:{{{moduleName}}}.{{classname}}{{operationIdCamelCase}}Request = {
+const body: Pieces.{{operationIdCamelCase}}Request = {
     {{#allParams}}
     // {{{dataType}}}{{#description}} | {{{description}}}{{/description}}{{^required}} (optional){{/required}}
     {{paramName}}: {{{example}}},
     {{/allParams}}
 };
+
+apiInstance.{{{operationId}}}(body).then((data: {{#returnType}}{{#returnTypeIsPrimitive}}{{{returnType}}}{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}{{{returnType}}}{{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}) => {
+    console.log('API called successfully. Returned data: ' + data)
+}).catch((error: unknown) => console.error(error))
 {{/hasParams}}
 {{^hasParams}}
-let body:any = {};
+apiInstance.{{{operationId}}}().then((data: {{#returnType}}{{#returnTypeIsPrimitive}}{{{returnType}}}{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}{{{returnType}}}{{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}) => {
+    console.log('API called successfully. Returned data: ' + data)
+}).catch((error: unknown) => console.error(error))
 {{/hasParams}}
-
-apiInstance.{{{operationId}}}(body).then((data:any) => {
-    console.log('API called successfully. Returned data: ' + data);
-}).catch((error:any) => console.error(error));
 ```
 
-
 ### Parameters
-{{^hasParams}}This endpoint does not need any parameter.{{/hasParams}}{{#allParams}}{{#-last}}
+{{^hasParams}}This endpoint does not need any parameters.{{/hasParams}}{{#allParams}}{{#-last}}
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
 {{#allParams}}{{^defaultValue}} **{{paramName}}** | {{^isPrimitiveType}}**{{{dataType}}}**{{/isPrimitiveType}}{{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}| {{description}} |
@@ -56,10 +57,6 @@ Name | Type | Description  | Notes
 
 {{#returnType}}{{#returnTypeIsPrimitive}}**{{{returnType}}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{{returnType}}}**]({{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}
 
-### Authorization
-
-{{^authMethods}}No authorization required{{/authMethods}}{{#authMethods}}[{{{name}}}](README.md#{{{name}}}){{^-last}}, {{/-last}}{{/authMethods}}
-
 ### HTTP request headers
 
 - **Content-Type**: {{#consumes}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/consumes}}{{^consumes}}Not defined{{/consumes}}
@@ -68,14 +65,12 @@ Name | Type | Description  | Notes
 {{#responses.0}}
 
 ### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
+| Status code | Description | Response headers
+|-------------|-------------|------------------
 {{#responses}}
 **{{code}}** | {{message}} | {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} |
 {{/responses}}
 {{/responses.0}}
-
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 {{/operation}}
 {{/operations}}
