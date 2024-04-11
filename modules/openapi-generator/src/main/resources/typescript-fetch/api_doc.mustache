@@ -4,14 +4,14 @@
 
 All URIs are relative to *{{basePath}}*
 
-Method | HTTP request
-------------- | -------------
-{{#operations}}{{#operation}}[**{{operationId}}**{{#isDeprecated}} - (Deprecated){{/isDeprecated}}**]({{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}}
+Method | HTTP request | Description
+------------- | ------------- | -------------
+{{#operations}}{{#operation}}[**{{operationId}}{{#isDeprecated}} - (Deprecated){{/isDeprecated}}**]({{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} | {{{summary}}}
 {{/operation}}{{/operations}}
 
 {{#operations}}
 {{#operation}}
-# **{{{operationId}}}**{{#isDeprecated}} - (Deprecated){{/isDeprecated}} {#{{operationIdLowerCase}}}
+## **{{{operationId}}}**{{#isDeprecated}} - (Deprecated){{/isDeprecated}} {#{{operationIdLowerCase}}}
 > {{#returnType}}{{{returnType}}} {{/returnType}}{{{operationId}}}({{#requiredParams}}{{^defaultValue}}{{paramName}}{{^-last}}, {{/-last}}{{/defaultValue}}{{/requiredParams}})
 
 {{#notes}}
