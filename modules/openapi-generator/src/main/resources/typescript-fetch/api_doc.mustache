@@ -1,8 +1,12 @@
+---
+title: {{classname}} | TypeScript SDK
+---
+
 # {{classname}}{{#description}}
 
-{{description}}{{/description}}
+    {{description}}{{/description}}
 
-All URIs are relative to *{{basePath}}*
+All URIs are relative to `{{basePath}}`
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -18,7 +22,7 @@ Method | HTTP request | Description
 {{{notes}}}
 {{/notes}}
 
-### Example
+### Example {#{{operationIdLowerCase}}-example}
 
 ```typescript
 import * as Pieces from '{{npmName}}'
@@ -28,24 +32,25 @@ const apiInstance = new Pieces.{{classname}}(configuration)
 
 {{#hasParams}}
 const body: Pieces.{{operationIdCamelCase}}Request = {
-    {{#allParams}}
-    // {{{dataType}}}{{#description}} | {{{description}}}{{/description}}{{^required}} (optional){{/required}}
-    {{paramName}}: {{{example}}},
-    {{/allParams}}
+{{#allParams}}
+// {{{dataType}}}{{#description}} | {{{description}}}{{/description}}{{^required}} (optional){{/required}}
+{{paramName}}: {{{example}}},
+{{/allParams}}
 };
 
 apiInstance.{{{operationId}}}(body).then((data: {{#returnType}}{{#returnTypeIsPrimitive}}{{{returnType}}}{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}{{{returnType}}}{{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}) => {
-    console.log('API called successfully. Returned data: ' + data)
+console.log('API called successfully. Returned data: ' + data)
 }).catch((error: unknown) => console.error(error))
 {{/hasParams}}
 {{^hasParams}}
 apiInstance.{{{operationId}}}().then((data: {{#returnType}}{{#returnTypeIsPrimitive}}{{{returnType}}}{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}{{{returnType}}}{{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}) => {
-    console.log('API called successfully. Returned data: ' + data)
+console.log('API called successfully. Returned data: ' + data)
 }).catch((error: unknown) => console.error(error))
 {{/hasParams}}
 ```
 
-### Parameters
+### Parameters {#{{operationIdLowerCase}}-parameters}
+
 {{^hasParams}}This endpoint does not need any parameters.{{/hasParams}}{{#allParams}}{{#-last}}
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
@@ -53,18 +58,18 @@ Name | Type | Description  | Notes
 {{/defaultValue}}{{/allParams}}{{#allParams}}{{#defaultValue}} **{{paramName}}** | {{^isPrimitiveType}}{{^isEnum}}**{{dataType}}**{{/isEnum}}{{/isPrimitiveType}}{{#isPrimitiveType}}[**{{dataType}}**]{{/isPrimitiveType}}{{#isEnum}}{{#allowableValues}}{{#enumVars}}{{#-first}}**Array<{{/-first}}{{value}}{{^-last}} &#124; {{/-last}}{{#-last}}>**{{/-last}}{{/enumVars}}{{/allowableValues}}{{/isEnum}} | {{description}} |{{^required}} (optional){{/required}} defaults to {{{.}}}
 {{/defaultValue}}{{/allParams}}
 
-### Return type
+### Return type {#{{operationIdLowerCase}}-return-type}
 
 {{#returnType}}{{#returnTypeIsPrimitive}}**{{{returnType}}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{{returnType}}}**]({{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}void (empty response body){{/returnType}}
 
-### HTTP request headers
+### HTTP request headers {#{{operationIdLowerCase}}-http-request-headers}
 
 - **Content-Type**: {{#consumes}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/consumes}}{{^consumes}}Not defined{{/consumes}}
 - **Accept**: {{#produces}}{{{mediaType}}}{{^-last}}, {{/-last}}{{/produces}}{{^produces}}Not defined{{/produces}}
 
 {{#responses.0}}
 
-### HTTP response details
+### HTTP response details {#{{operationIdLowerCase}}-http-response-details}
 | Status code | Description | Response headers
 |-------------|-------------|------------------
 {{#responses}}
